@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import ProtectedRoute from "@/components/protected-route";
 import { Course, CourseGrid } from "@/components/course-list"; // Importa el tipo Course y el componente CourseGrid
 import { API_URL } from "@/app/config";
-
+import { STRAPI_URL } from "@/app/config";
 export default function Page() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
@@ -11,7 +11,7 @@ export default function Page() {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch(`${API_URL}/cursos`);
+      const response = await fetch(`${API_URL}/cursos?populate=*`);
       if (!response.ok) {
         throw new Error("Error al obtener los cursos");
       }
@@ -36,6 +36,11 @@ export default function Page() {
             Costo: course.CUR_COSTO.toString(),
             Modalidad: course.CUR_MODALIDAD,
             Estado: course.CUR_ESTADO.toString(),
+              CUR_IMAGEN: {
+                        url: course.CUR_IMAGEN?.url
+                          ? `${STRAPI_URL}${course.CUR_IMAGEN.url}` // Concatenar dominio base con la ruta de la imagen
+                          : "/logo_synergyex.png", // Imagen por defecto (ruta relativa o completa)
+                      },
           }));
 
         setCourses(vigentes); // Guarda solo los cursos vigentes

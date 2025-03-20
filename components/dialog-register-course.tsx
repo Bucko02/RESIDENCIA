@@ -286,7 +286,7 @@ export function DialogRegisterCourse({ open, onOpenChange, onSave }: DialogRegis
                 <SelectContent>
                   <SelectItem value="VIGENTE">VIGENTE</SelectItem>
                   <SelectItem value="EN DESARROLLO">EN DESARROLLO</SelectItem>
-                  <SelectItem value="BAJA">BAJA</SelectItem>
+                 
                 </SelectContent>
               </Select>
             </div>

@@ -26,7 +26,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { API_URL } from "@/app/config";
-import Image from "next/image";
+
 
 // Define y exporta el tipo Course
 export type Course = {
@@ -366,7 +366,7 @@ export const CourseGrid = ({ courses, onUpdate }: CourseGridProps) => {
       </div>
 
       {/* Grid de tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-3">
         {filteredCourses.map((course) => (
           <CourseCard
             key={course.documentId} // Usamos documentId como clave
@@ -409,7 +409,7 @@ export const CourseGrid = ({ courses, onUpdate }: CourseGridProps) => {
               Capacidad: updatedCurso.CUR_CAPACIDAD.toString(),
               Costo: updatedCurso.CUR_COSTO.toString(),
               Modalidad: updatedCurso.CUR_MODALIDAD,
-              Estado: editingCourse.Estado, // Asegúrate de incluir el estado
+              Estado: editingCourse.Estado, 
               CUR_IMAGEN: editingCourse.CUR_IMAGEN,
             
             };
