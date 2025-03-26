@@ -1,5 +1,5 @@
 "use client";
-
+import { usePathname } from 'next/navigation';
 import * as React from "react";
 import {
   AudioWaveform,
@@ -77,6 +77,7 @@ const data = {
       title: "Cursos",
       url: "#",
       icon: GalleryVerticalEnd,
+      isActive: true,
       items: [
         {
           title: "Gestionar Cursos",

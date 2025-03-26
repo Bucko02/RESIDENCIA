@@ -93,7 +93,7 @@ export const CourseGrid = ({ courses }: CourseGridProps) => {
           placeholder="Buscar cursos..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full p-2 border rounded-md"
+          className="w-[50%] p-2 border rounded-md"
         />
       </div>
 

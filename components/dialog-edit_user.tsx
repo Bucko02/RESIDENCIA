@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Pencil } from "lucide-react";
 
 // Define el tipo User con los campos que necesitas
 type User = {
@@ -62,7 +63,10 @@ export function DialogEditUser({ user, onSave }: DialogEditUserProps) {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">Editar Usuario</Button>
+      <Button variant="ghost" className="justify-start w-full">
+        <Pencil className="mr-2 h-4 w-4" />
+        Editar Usuario
+      </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>

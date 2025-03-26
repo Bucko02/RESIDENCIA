@@ -16,9 +16,11 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import ProtectedRoute from "@/components/protected-route";
-import { Course, CourseGrid } from "@/components/course-grid"; // Importa el tipo Course y el componente CourseGrid
+import { Course, CourseTable } from "@/components/table-course"; // Cambia CourseGrid por CourseTable
+
 import { API_URL } from "@/app/config";
 import { STRAPI_URL } from "@/app/config";
+
 export default function Page() {
   const [courses, setCourses] = useState<Course[]>([]);
   const [loading, setLoading] = useState(true);
@@ -32,10 +34,9 @@ export default function Page() {
       }
       const result = await response.json();
       
-
       if (Array.isArray(result.data)) {
         const filteredCourses = result.data.map((course: any) => ({
-          documentId : course.documentId,
+          documentId: course.documentId,
           Clave: course.CUR_CLAVE,
           Nombre: course.CUR_NOMBRE_CURSO,
           Objetivo: course.CUR_OBJETIVO,
@@ -50,8 +51,8 @@ export default function Page() {
           Estado: course.CUR_ESTADO.toString(),
           CUR_IMAGEN: {
             url: course.CUR_IMAGEN?.url
-              ? `${STRAPI_URL}${course.CUR_IMAGEN.url}` // Concatenar dominio base con la ruta de la imagen
-              : "/logo_synergyex.png", // Imagen por defecto (ruta relativa o completa)
+              ? `${STRAPI_URL}${course.CUR_IMAGEN.url}`
+              : "/logo_synergyex.png",
           },
         }));
         console.log(filteredCourses);
@@ -71,9 +72,8 @@ export default function Page() {
     fetchCourses();
   }, []);
 
-  // Función para actualizar la lista de usuarios
   const handleUpdate = () => {
-    fetchCourses(); // Obtener la lista actualizada de usuarios
+    fetchCourses();
   };
   
   return (
@@ -100,6 +100,12 @@ export default function Page() {
               </Breadcrumb>
             </div>
           </header>
+          <div>
+            <h1 className="text-custom-red text-4xl font-bold p-5 text-center">CURSOS</h1>
+          </div>
+            <div className="bg-custom-red text-white w-full">
+              <h1 className="text-3xl p-4">Gestionar Cursos</h1>
+            </div>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min p-4">
               {loading ? (
@@ -107,9 +113,7 @@ export default function Page() {
               ) : error ? (
                 <p>{error}</p>
               ) : (
-                <CourseGrid courses={courses} 
-                onUpdate={handleUpdate}/>
-                
+                <CourseTable courses={courses} onUpdate={handleUpdate} />
               )}
             </div>
           </div>

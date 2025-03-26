@@ -1,5 +1,8 @@
 import type { Config } from "tailwindcss";
 
+
+
+
 export default {
     darkMode: ["class"],
     content: [
@@ -50,6 +53,7 @@ export default {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			},
+			  'custom-red': '#850305',
   			sidebar: {
   				DEFAULT: 'hsl(var(--sidebar-background))',
   				foreground: 'hsl(var(--sidebar-foreground))',

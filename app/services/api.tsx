@@ -57,4 +57,6 @@ export const deleteUser = async (id: string): Promise<void> => {
   if (!response.ok) {
     throw new Error("Error al eliminar el usuario");
   }
+
+
 };
