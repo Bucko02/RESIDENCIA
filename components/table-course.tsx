@@ -68,8 +68,9 @@ export type Course = {
   Modalidad: string;
   Estado: string;
   CUR_IMAGEN: {
+    id: number;
     url: string; // URL de la imagen
-  };
+  }| null;
 };
 
 type RegisterCourse = {
@@ -127,7 +128,7 @@ const columns = (
       <div className="relative group h-12 w-12">
         {/* Miniatura */}
         <img
-          src={row.original.CUR_IMAGEN.url}
+          src={row.original.CUR_IMAGEN?.url || ""}
           alt="Miniatura"
           className="h-full w-full object-cover rounded border border-gray-200 cursor-pointer"
         />
@@ -145,7 +146,7 @@ const columns = (
             pointer-events-auto  // Permite interactuar con este div
           ">
             <img
-              src={row.original.CUR_IMAGEN.url}
+              src={row.original.CUR_IMAGEN?.url || ""}
               alt="Zoom"
               className="w-full h-full object-contain"
             />
@@ -230,7 +231,8 @@ const columns = (
                   CUR_MODALIDAD: updatedCourse.Modalidad,
                   CUR_COSTO: Number(updatedCourse.Costo),
                   CUR_MODULO: updatedCourse.Modulo,
-                  CUR_ESTADO: updatedCourse.Estado
+                  CUR_ESTADO: updatedCourse.Estado,
+                  CUR_IMAGEN: updatedCourse.CUR_IMAGEN,
                 }
               }),
           });

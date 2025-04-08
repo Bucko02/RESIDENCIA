@@ -128,9 +128,12 @@ export function DialogRegisterCourse({ onSave }: DialogRegisterCourseProps) {
         <div className="space-y-4">
           <div>
             <Label>Nombre del Curso</Label>
-            <Input
+            <textarea
               value={Nombre}
               onChange={(e) => setNombre(e.target.value)}
+              className="w-full p-2 border rounded-md resize-none"
+              rows={2}
+              maxLength={500}
               required
             />
           </div>
@@ -169,18 +172,24 @@ export function DialogRegisterCourse({ onSave }: DialogRegisterCourseProps) {
 
           <div>
             <Label>Objetivo</Label>
-            <Input
+            <textarea
               value={Objetivo}
               onChange={(e) => setObjetivo(e.target.value)}
+              className="w-full p-2 border rounded-md resize-none"
+              rows={4}
+              maxLength={500}
               required
             />
           </div>
 
           <div>
             <Label>Dirigido A</Label>
-            <Input
+            <textarea
               value={Dirigido}
               onChange={(e) => setDirigido(e.target.value)}
+              className="w-full p-2 border rounded-md resize-none"
+              rows={3}
+              maxLength={500}
               required
             />
           </div>
@@ -248,9 +257,12 @@ export function DialogRegisterCourse({ onSave }: DialogRegisterCourseProps) {
 
           <div>
             <Label>Módulo</Label>
-            <Input
+            <textarea
               value={Modulo}
               onChange={(e) => setModulo(e.target.value)}
+              className="w-full p-2 border rounded-md resize-none"
+              rows={4}
+              maxLength={500}
               required
             />
           </div>

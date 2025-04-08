@@ -42,7 +42,7 @@ export default function Page() {
           Objetivo: course.CUR_OBJETIVO,
           Tipo: course.CUR_TIPO,
           Dirigido: course.CUR_DRIGIDO_A,
-          Horas_tot: course.CUR_TOTAL_HORAS.toString(),
+          Horas: course.CUR_TOTAL_HORAS.toString(),
           Origen: course.CUR_ORIGEN,
           Modulo: course.CUR_MODULO || "N/A",
           Capacidad: course.CUR_CAPACIDAD.toString(),
