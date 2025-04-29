@@ -14,7 +14,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Plus } from "lucide-react";
+import { ArrowUpDown, CheckCircle, ChevronDown, MoreHorizontal, Plus, Trash2, XCircle } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -220,11 +220,24 @@ export const columns = (
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Opciones</DropdownMenuLabel>
             <DropdownMenuItem onClick={handleDeactivateUser}>
-              {user.blocked ? "Activar usuario" : "Desactivar usuario"}
+            {user.blocked ? (
+              <>
+                <CheckCircle className="mr-2 h-4 w-4 text-green-600" />
+                Activar usuario
+              </>
+            ) : (
+              <>
+                <XCircle className="mr-2 h-4 w-4 text-red-600" />
+                Desactivar usuario
+              </>
+            )}
             </DropdownMenuItem>
             <DropdownMenuSeparator />
+            
             <DialogEditUser user={user} onSave={handleUpdateUser} />
+            <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleDeleteUser}>
+            <Trash2 className="mr-2 h-4 w-4" />
               Eliminar usuario
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -398,9 +411,7 @@ export function DataTableDemo({
               Columnas <ChevronDown />
             </Button>
           </DropdownMenuTrigger>
-
           <DialogRegisterUser onSave={handleRegisterUser} role={role} /> {/* Pasa el rol */}
-
           <DropdownMenuContent align="end">
             {table
               .getAllColumns()

@@ -77,6 +77,7 @@ const data = {
       title: "Cursos",
       url: "#",
       icon: GalleryVerticalEnd,
+      isActive: true,
       items: [
         {
           title: "Gestionar Cursos",

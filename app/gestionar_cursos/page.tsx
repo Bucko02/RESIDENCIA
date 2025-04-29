@@ -16,8 +16,10 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import ProtectedRoute from "@/components/protected-route";
-import { Course, CourseGrid } from "@/components/course-grid"; // Importa el tipo Course y el componente CourseGrid
+import { Course, CourseTable } from "@/components/table-course"; // Cambia CourseGrid por CourseTable
+
 import { API_URL } from "@/app/config";
+import { STRAPI_URL } from "@/app/config";
 
 export default function Page() {
   const [courses, setCourses] = useState<Course[]>([]);
@@ -26,30 +28,34 @@ export default function Page() {
 
   const fetchCourses = async () => {
     try {
-      const response = await fetch(`${API_URL}/cursos`);
+      const response = await fetch(`${API_URL}/cursos?populate=*`);
       if (!response.ok) {
         throw new Error("Error al obtener los cursos");
       }
       const result = await response.json();
-      console.log(result);
-
+      
       if (Array.isArray(result.data)) {
         const filteredCourses = result.data.map((course: any) => ({
-          documentId : course.documentId,
+          documentId: course.documentId,
           Clave: course.CUR_CLAVE,
           Nombre: course.CUR_NOMBRE_CURSO,
           Objetivo: course.CUR_OBJETIVO,
           Tipo: course.CUR_TIPO,
           Dirigido: course.CUR_DRIGIDO_A,
-          Horas_tot: course.CUR_TOTAL_HORAS.toString(),
+          Horas: course.CUR_TOTAL_HORAS.toString(),
           Origen: course.CUR_ORIGEN,
           Modulo: course.CUR_MODULO || "N/A",
           Capacidad: course.CUR_CAPACIDAD.toString(),
           Costo: course.CUR_COSTO.toString(),
           Modalidad: course.CUR_MODALIDAD,
           Estado: course.CUR_ESTADO.toString(),
+          CUR_IMAGEN: {
+            url: course.CUR_IMAGEN?.url
+              ? `${STRAPI_URL}${course.CUR_IMAGEN.url}`
+              : "/logo_synergyex.png",
+          },
         }));
-
+        console.log(filteredCourses);
         setCourses(filteredCourses);
       } else {
         throw new Error("La respuesta de la API no contiene un array de cursos");
@@ -66,9 +72,8 @@ export default function Page() {
     fetchCourses();
   }, []);
 
-  // Función para actualizar la lista de usuarios
   const handleUpdate = () => {
-    fetchCourses(); // Obtener la lista actualizada de usuarios
+    fetchCourses();
   };
   
   return (
@@ -95,6 +100,12 @@ export default function Page() {
               </Breadcrumb>
             </div>
           </header>
+          <div>
+            <h1 className="text-custom-red text-4xl font-bold p-5 text-center">CURSOS</h1>
+          </div>
+            <div className="bg-custom-red text-white w-full">
+              <h1 className="text-3xl p-4">Gestionar Cursos</h1>
+            </div>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
             <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min p-4">
               {loading ? (
@@ -102,9 +113,7 @@ export default function Page() {
               ) : error ? (
                 <p>{error}</p>
               ) : (
-                <CourseGrid courses={courses} 
-                onUpdate={handleUpdate}/>
-                
+                <CourseTable courses={courses} onUpdate={handleUpdate} />
               )}
             </div>
           </div>

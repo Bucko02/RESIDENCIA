@@ -16,7 +16,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar";
 import ProtectedRoute from "@/components/protected-route";
-import { Course, CourseGrid } from "@/components/course-grid"; // Importa el tipo Course y el componente CourseGrid
+
 
 export default function Page() {
   const [courses, setCourses] = useState<Course[]>([]);

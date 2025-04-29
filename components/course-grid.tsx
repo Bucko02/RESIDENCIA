@@ -27,6 +27,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { API_URL } from "@/app/config";
 
+
 // Define y exporta el tipo Course
 export type Course = {
   documentId: string; // Usamos documentId en lugar de id
@@ -41,7 +42,10 @@ export type Course = {
   Capacidad: string;
   Costo: string;
   Modalidad: string;
-  Estado: string; // Nuevo campo para el estado del curso
+  Estado: string; 
+  CUR_IMAGEN: {
+    url: string; // URL de la imagen
+  };
 };
 
 // Define el componente CourseCard
@@ -58,6 +62,16 @@ const CourseCard = ({ course, onEdit, onChangeStatus, onDelete }: CourseCardProp
 
   return (
     <Card className="w-full max-w-sm flex flex-col">
+     
+     {/* Mostrar la imagen */}
+     <div className="relative h-48 w-full">
+        <img
+          src={course.CUR_IMAGEN.url} // Usa la URL de la imagen
+          
+          className="object-cover w-full h-48 rounded-t-lg"
+        />
+      </div>
+
       <CardHeader>
         <CardTitle>{course.Nombre}</CardTitle>
         <CardDescription>{course.Clave}</CardDescription>
@@ -352,7 +366,7 @@ export const CourseGrid = ({ courses, onUpdate }: CourseGridProps) => {
       </div>
 
       {/* Grid de tarjetas */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 p-3">
         {filteredCourses.map((course) => (
           <CourseCard
             key={course.documentId} // Usamos documentId como clave
@@ -395,7 +409,9 @@ export const CourseGrid = ({ courses, onUpdate }: CourseGridProps) => {
               Capacidad: updatedCurso.CUR_CAPACIDAD.toString(),
               Costo: updatedCurso.CUR_COSTO.toString(),
               Modalidad: updatedCurso.CUR_MODALIDAD,
-              Estado: editingCourse.Estado, // Asegúrate de incluir el estado
+              Estado: editingCourse.Estado, 
+              CUR_IMAGEN: editingCourse.CUR_IMAGEN,
+            
             };
             handleSaveCourse(updatedCourse);
           }}
